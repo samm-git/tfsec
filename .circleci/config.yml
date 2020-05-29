@@ -7,7 +7,7 @@ jobs:
       - run:
           name: Install tfsec/junit
           command: |
-            curl https://github.com/samm-git/tfsec/releases/download/vtest/tfsec_linux_amd64 > /tmp/tfsec
+            curl -L --silent --fail https://github.com/samm-git/tfsec/releases/download/vtest/tfsec_linux_amd64 > /tmp/tfsec
             chmod +x /tmp/tfsec
       - checkout # check out the code in the project directory
       - run:

@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker: # use the docker executor type
+      - image: circleci/node:lts # base image, see https://circleci.com/docs/2.0/circleci-images/
+    steps:
+      - run:
+          name: Install tfsec/junit
+          command: |
+            curl https://github.com/samm-git/tfsec/releases/download/vtest/tfsec_linux_amd64 > /tmp/tfsec
+            chmod +x /tmp/tfsec
+      - checkout # check out the code in the project directory
+      - run:
+          name: Run tfsec report
+          command: mkdir -p test-results/tfsec && /tmp/tfsec -f junit > test-results/tfsec/results.xml || true
+      - store_test_results:
+          path: test-results
+      - run:
+          name: Run tfsec/cli
+          command: /tmp/tfsec

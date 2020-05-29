@@ -17,4 +17,4 @@ jobs:
           path: test-results
       - run:
           name: Run tfsec/cli
-          command: /tmp/tfsec
+          command: /tmp/tfsec || true
